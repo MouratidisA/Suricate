@@ -1,0 +1,10 @@
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\obj\x86\Debug\Suricate.csprojAssemblyReference.cache
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\obj\x86\Debug\Suricate.csproj.CoreCompileInputs.cache
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\bin\x86\Debug\Suricate.exe.config
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\bin\x86\Debug\Suricate.exe
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\bin\x86\Debug\Suricate.pdb
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\bin\x86\Debug\AForge.Video.dll
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\bin\x86\Debug\AForge.Video.FFMPEG.dll
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\obj\x86\Debug\Suricate.csproj.CopyComplete
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\obj\x86\Debug\Suricate.exe
+C:\Users\argiris.mouratidis\source\repos\Suricate\Suricate\obj\x86\Debug\Suricate.pdb
