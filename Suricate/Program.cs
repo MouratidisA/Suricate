@@ -1,4 +1,4 @@
-﻿using AForge.Video.FFMPEG;
+﻿using Accord.Video.FFMPEG;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -10,11 +10,11 @@ namespace Suricate
     class Program
     {
         public static int ShotId;
-        public static string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Suricate\\" + DateTime.Now.Date.ToShortDateString().Replace('/', '_');
-        public static string keepImages = String.Empty;
+        public static string Path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Suricate\\" + DateTime.Now.Date.ToShortDateString().Replace('/', '_');
+        public static string KeepImages = String.Empty;
 
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\r\n  ____                   _                  _          \r\n / ___|   _   _   _ __  (_)   ___    __ _  | |_    ___ \r\n \\___ \\  | | | | | '__| | |  / __|  / _` | | __|  / _ \\\r\n  ___) | | |_| | | |    | | | (__  | (_| | | |_  |  __/\r\n |____/   \\__,_| |_|    |_|  \\___|  \\__,_|  \\__|  \\___|\r\n                                                       \r\n");
@@ -31,7 +31,7 @@ namespace Suricate
             Console.WriteLine("Set Screen capture interval seconds: ");
             var intervals = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Would you like to keep Screenshots image files y/n?");
-            keepImages = Console.ReadLine();
+            KeepImages = Console.ReadLine();
 
             Console.WriteLine("___________________________________________\n");
             Console.WriteLine("Press ESC to stop");
@@ -60,17 +60,18 @@ namespace Suricate
 
         public static void TimeLapseConverter()
         {
-            var imageCount = Directory.GetFiles(path).Length;
+            var imageCount = Directory.GetFiles(Path).Length;
 
             using (var videoWriter = new VideoFileWriter())
             {
-                videoWriter.Open(path + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + "_TimeLapse.avi", Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, 15, VideoCodec.MPEG4, 1000000);
+                
+                videoWriter.Open(Path + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + "_TimeLapse.avi", Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, 15, VideoCodec.MPEG4, 1000000);
 
                 for (int imageFrame = 0; imageFrame < imageCount; imageFrame++)
                 {
-                    var imgPath = String.Format("{0}/Screenshot_{1}.bmp", path, imageFrame);
+                    var imgPath = String.Format("{0}/Screenshot_{1}.bmp", Path, imageFrame);
 
-                    using (Bitmap image = Bitmap.FromFile(imgPath) as Bitmap)
+                    using (Bitmap image = Image.FromFile(imgPath) as Bitmap)
                     {
                         videoWriter.WriteVideoFrame(image);
                     }
@@ -80,9 +81,9 @@ namespace Suricate
             }
 
             Console.WriteLine("Video ready!");
-            var dir = new DirectoryInfo(path);
+            var dir = new DirectoryInfo(Path);
 
-            if (keepImages.Equals("y"))
+            if (KeepImages.Equals("y"))
             {
                 dir.Delete(true); // true => recursive delete
                 Console.WriteLine("Video Screenshots' folder removed...");
@@ -93,16 +94,16 @@ namespace Suricate
         public static void TakeScreenShot(int id)
         {
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(Path))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(Path);
             }
 
             Bitmap bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
 
             Graphics graphics = Graphics.FromImage(bitmap);
             graphics.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
-            bitmap.Save(path + "/Screenshot_" + id + ".bmp", ImageFormat.Bmp);
+            bitmap.Save(Path + "/Screenshot_" + id + ".bmp", ImageFormat.Bmp);
         }
 
     }
